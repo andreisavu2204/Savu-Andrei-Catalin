@@ -1,0 +1,254 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d0d0d;
+    color: #f2f2f2;
+    /* Am ajustat padding-ul pentru a lăsa loc benzilor laterale de 60px */
+    padding: 30px 90px;
+    /* Fundal Mov-Albastru Neon */
+    background-image: linear-gradient(to right, #1f0036, #0d1b2a);
+}
+
+/* ==================================================== */
+/* --- BENZI LATERALE (Side Bands) CU IMAGINE --- */
+/* ==================================================== */
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 60px;
+    height: 100vh;
+    z-index: -1;
+    
+    background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fzaax36mhjij71.jpg%3Fwidth%3D640%26crop%3Dsmart%26auto%3Dwebp%26s%3D71944eff3e96efa640b9cabf63f2c66bd6fea173');
+    background-size: cover;
+    background-repeat: repeat-y;
+    box-shadow: 0 0 15px #ff00ff;
+}
+
+body::before {
+    left: 0;
+    border-right: 3px solid #ff00ff;
+}
+
+body::after {
+    right: 0;
+    border-left: 3px solid #ff00ff;
+}
+/* ==================================================== */
+
+h1 {
+    color: #ff00ff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+    text-align: center;
+}
+
+/* Stil de bază pentru link-urile care nu sunt butoane */
+a {
+    color: #00ffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #fff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+/* Stil pentru Navigare (containerul) */
+nav {
+    margin: 20px 0;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav li {
+    display: inline;
+    margin: 0;
+}
+
+
+/* ==================================================== */
+/* --- BUTONUL DE JOC ARCADE (APLICAT PE LINKURI) --- */
+/* ==================================================== */
+.arcade-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a002b;
+    border: 2px solid #ff00ff;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    box-shadow: 0 0 10px #00ffff, 0 0 15px rgba(255, 0, 255, 0.5);
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.arcade-button:hover {
+    background-color: #2b004a;
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 15px #ff00ff, 0 0 25px #00ffff;
+    transform: scale(1.1); /* Efect Pop-up Mărit */
+    text-shadow: 0 0 5px #fff;
+    text-decoration: none;
+}
+/* -------------------------------------------------------- */
+
+
+/* Stil de bază pentru butonul <button> */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #00ffff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #00ffff;
+}
+
+button:hover {
+    background-color: #ff00ff;
+    color: white;
+    box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+    transform: scale(1.05);
+}
+
+/* Stiluri pentru Formulare și Input-uri */
+form {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+input, textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #f2f2f2;
+    box-shadow: 0 0 3px #00ffff;
+}
+
+
+/* ==================================================== */
+/* --- STILURI PENTRU CARDURILE DE MANAGEMENT (PACHETE) --- */
+/* ==================================================== */
+.packages-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.package-card {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 25px;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 10px #ff00ff;
+    transition: all 0.4s ease;
+    
+    /* Flexbox pentru a alinia butoanele jos */
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* NOU: Container flexibil pentru conținutul care variază în înălțime */
+.package-content {
+    flex-grow: 1; /* Permite acestui div să ocupe tot spațiul disponibil */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.package-card h2 {
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff;
+    margin-top: 0;
+}
+
+.package-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5), 0 0 20px #00ffff;
+    border-color: #00ffff;
+}
+
+.package-card .price {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ff00ff;
+    margin: 15px 0;
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+.package-card ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Stil pentru fiecare caracteristică (ramă neon turcoaz) */
+.package-card ul li {
+    background: none;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 8px;
+    color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    transition: none;
+}
+
+.package-card ul li:hover {
+    transform: none;
+    box-shadow: 0 0 8px #00ffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.package-card ul li::before {
+    content: '★';
+    color: #ff00ff;
+    margin-right: 10px;
+}
+
+/* Stil pentru butonul de comandă din card (aliniat jos și centrat) */
+.package-card .order-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #00ffff;
+    color: #0d0d0d;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    align-self: center; /* Centrare orizontală în Flex container */
+    margin-top: auto; /* Împinge butonul cât mai jos posibil */
+}
+
+.package-card .order-btn:hover {

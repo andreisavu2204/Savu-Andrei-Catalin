@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Arcade Management</title>
+  <link rel="stylesheet" href="main.css"> 
+</head>
+<body>
+
+  <nav>
+      <ul>
+          <li><a href="login.html" class="arcade-button">Login</a></li>
+          <li><a href="main.html" class="arcade-button">Task-uri (Planner)</a></li>
+          <li><a href="calendar.html" class="arcade-button">Calendar</a></li>
+          <li><a href="stats.html" class="arcade-button">Statistici</a></li>
+          <li><a href="explore.html" class="arcade-button">Explore</a></li>
+      </ul>
+  </nav>
+
+  <div class="container" style="max-width: 400px;">
+    <h1>Login</h1>
+    <form action="login.php" method="POST">
+      <input type="text" name="username" placeholder="Utilizator" required>
+      <input type="password" name="password" placeholder="Parolă" required>
+      
+      <input type="hidden" name="redirect" id="redirect-input" value="management"> 
+      
+      <button type="submit">Loghează-te</button>
+    </form>
+  </div>
+
+  <script>
+    // Script pentru a prelua parametrul 'redirect' din URL-ul login.html
+    // Acesta asigură că, după autentificare, ajungi la pagina corectă (ex: standard_package.html)
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectValue = urlParams.get('redirect');
+
+    if (redirectValue) {
+      document.getElementById('redirect-input').value = redirectValue;
+    }
+  </script>
+</body>
+</html>
