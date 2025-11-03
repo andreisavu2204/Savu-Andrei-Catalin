@@ -19,11 +19,14 @@
             border-radius: 10px;
             border: 2px solid #00ffff;
             box-shadow: 0 0 10px #00ffff;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Efectul Pop-up și Neon Turcoaz intensificat la Hover */
         .gallery img:hover {
-            transform: scale(1.05);
+            transform: scale(1.1); 
+            box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; 
+            cursor: pointer;
         }
 
         .description {
@@ -56,7 +59,6 @@
         <img src="https://th.bing.com/th/id/R.ea18f5302bf04fe9c7d08bfacc602761?rik=P8UiOUzZcFTmBg&pid=ImgRaw&r=0" alt="Sala Arcade 5">
     </div>
 
-    <p><a href="document.html">⬅ Înapoi la pagina principală</a></p>
+    <p style="text-align: center;"><a href="document.html" class="arcade-button">⬅ Înapoi la pagina principală</a></p>
 </body>
 </html>
-

@@ -2,21 +2,32 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login - Arcade Management</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Autentificare</h1>
+
+<div class="container" style="max-width: 400px; margin: 50px auto;">
+    <h1>Login</h1>
     <form action="login.php" method="POST">
-        <label for="username">Utilizator:</label>
-        <input type="text" id="username" name="username" required><br>
+        <input type="text" name="username" placeholder="Utilizator" required>
+        <input type="password" name="password" placeholder="Parolă" required>
 
-        <label for="password">Parolă:</label>
-        <input type="password" id="password" name="password" required><br>
+        <!-- Hidden input pentru redirect -->
+        <input type="hidden" name="redirect" value="checkout.php">
 
-        <button type="submit">Login</button>
+        <button type="submit" class="arcade-button">Loghează-te</button>
     </form>
+</div>
 
-    <p><a href="document.html">Înapoi la document</a></p>
+<script>
+    // Preluăm parametrul redirect din URL și îl punem în hidden input
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectValue = urlParams.get('redirect');
+    if(redirectValue){
+        document.querySelector('input[name="redirect"]').value = redirectValue + "_package.php";
+    }
+</script>
+
 </body>
 </html>
