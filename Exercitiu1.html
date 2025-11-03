@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercitiul 1</title>
+</head>
+<body>
+  <h1>Exercitiul 1 - vezi consola</h1>
+  <script>
+    // variabile (conform PDF)
+    var myName = "Savu";           // pune prenumele tău
+    var mySurname = "Andrei";    // pune numele tău
+    var myAge = 221;               // valoare inițială
+    var studyYear = 3;
+    var myHobby = "fotbal";
+
+    // Folosind operatorul += modificăm myAge pentru a avea 25
+    myAge += 4; // 21 + 4 = 25
+
+    // Afișare folosind concatenare (+)
+    console.log("Buna! Ma numesc " + myName + " " + mySurname + " si am " + myAge + " ani. Sunt la Universitatea Politehnica Bucuresti, in anul " + studyYear + ". Unul dintre hobby-urile mele este " + myHobby + ".");
+
+    // Afișare folosind placeholders (template literals)
+    console.log(`Buna! Ma numesc ${myName} ${mySurname} si am ${myAge} ani. Sunt la Universitatea Politehnica Bucuresti, in anul ${studyYear}. Unul dintre hobby-urile mele este ${myHobby}.`);
+
+    // Afișăm tipurile folosind operatorul typeof
+    console.log("typeof myName =", typeof myName);     // string
+    console.log("typeof myAge =", typeof myAge);       // number
+    console.log("typeof myHobby =", typeof myHobby);   // string
+  </script>
+</body>
+</html>

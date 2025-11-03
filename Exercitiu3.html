@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercitiul 3</title>
+</head>
+<body>
+  <h1>Exercitiul 3 - vezi consola</h1>
+  <script>
+    // 3 numere date în cod
+    var x = 15;
+    var y = 4;
+    var z = 12;
+
+    // Vom determina max, mid, min prin comparații
+    var max, mid, min;
+
+    if (x >= y && x >= z) {
+      max = x;
+      if (y >= z) { mid = y; min = z; }
+      else { mid = z; min = y; }
+    } else if (y >= x && y >= z) {
+      max = y;
+      if (x >= z) { mid = x; min = z; }
+      else { mid = z; min = x; }
+    } else {
+      max = z;
+      if (x >= y) { mid = x; min = y; }
+      else { mid = y; min = x; }
+    }
+
+    console.log("Numerele in ordine descrescatoare:", max + ", " + mid + ", " + min);
+    // Exemplu: 15, 12, 4
+  </script>
+</body>
+</html>

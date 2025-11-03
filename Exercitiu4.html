@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercitiul 4</title>
+</head>
+<body>
+  <h1>Exercitiul 4 - vezi consola</h1>
+  <script>
+    // 4 numere date in cod
+    var a = 13;
+    var b = 17;
+    var c = 13;
+    var d = 17;
+
+    // Verificăm frecvența valorilor (câte apariții are fiecare). Pentru dreptunghi trebuie:
+    // - fie toate 4 egale (square) -> valid
+    // - fie 2 valori distincte, fiecare apărute de 2 ori -> valid
+    // Altfel nu pot fi laturile unui dreptunghi.
+
+    // Construim un obiect de frecvență
+    var frec = {};
+    [a,b,c,d].forEach(function(v){
+      frec[v] = (frec[v] || 0) + 1;
+    });
+
+    var keys = Object.keys(frec);
+    var poate = false;
+    var aria = null;
+    var perimetrul = null;
+
+    if (keys.length === 1) {
+      // toate laturile egale -> pătrat
+      poate = true;
+      var l = Number(keys[0]);
+      perimetrul = 4 * l;
+      aria = l * l;
+    } else if (keys.length === 2) {
+      // verificăm ca fiecare să apară de două ori
+      var ok = true;
+      for (var k in frec) {
+        if (frec[k] !== 2) ok = false;
+      }
+      if (ok) {
+        poate = true;
+        var vals = keys.map(Number);
+        // valorile distincte reprezintă lungimile laturilor opuse
+        var l1 = vals[0], l2 = vals[1];
+        perimetrul = 2 * (l1 + l2);
+        aria = l1 * l2;
+      }
+    }
+
+    if (poate) {
+      console.log("Cele 4 numere pot reprezenta laturi ale unui dreptunghi! Perimetrul este:", perimetrul + ".", "Aria este:", aria + ".");
+    } else {
+      console.log("Cele 4 numere nu pot reprezenta laturi ale unui dreptunghi!");
+    }
+
+    // Exemple:
+    // 25,4,25,16 -> frecventa: 25:2, 4:1, 16:1 -> nu e dreptunghi
+    // 13,17,13,17 -> frecventa: 13:2, 17:2 -> e dreptunghi (perimetrul=2*(13+17)=60, aria=13*17=221)
+  </script>
+</body>
+</html>

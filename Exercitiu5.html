@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercitiul 5</title>
+</head>
+<body>
+  <h1>Exercitiul 5 - vezi consola</h1>
+  <script>
+    // 3 laturi date în cod
+    var l1 = 6;
+    var l2 = 6;
+    var l3 = 6;
+
+    // Verificarea condiției de existență a triunghiului:
+    // fiecare latură < suma celorlalte două (sau <= ? - aici standard: < pentru lungimi pozitive)
+    var exista = (l1 < l2 + l3) && (l2 < l1 + l3) && (l3 < l1 + l2);
+
+    if (!exista) {
+      console.log("Cele 3 laturi NU pot forma un triunghi.");
+    } else {
+      // determinăm tipul
+      if (l1 === l2 && l2 === l3) {
+        console.log("Triunghiul este: Echilateral (toate laturile egale).");
+      } else if (l1 === l2 || l1 === l3 || l2 === l3) {
+        console.log("Triunghiul este: Isoscel (două laturi egale).");
+      } else {
+        console.log("Triunghiul este: Oarecare (toate laturile diferite).");
+      }
+    }
+
+    // Observație: folosim aici operatori de comparare și operatori logici (&&) -- concepte din PDF.
+  </script>
+</body>
+</html>
