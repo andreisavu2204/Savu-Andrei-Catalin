@@ -6,16 +6,110 @@
   <title>Statistici - Arcade Planner</title>
   <link rel="stylesheet" href="main.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0e0e0e;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.2em;
+      color: #00ffb3;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #1a1a1a;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 179, 0.3);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 255, 179, 0.2);
+    }
+
+    p {
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .text-section {
+      margin: 30px auto;
+      width: 90%;
+      max-width: 900px;
+      background-color: #181818;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.15);
+    }
+  </style>
 </head>
 <body>
 
-  <h1>📊 Statistici Taskuri Arcade</h1>
+  <h1>📊 Statistici & Impactul Gamingului</h1>
 
   <div class="container">
-    <p>Urmărește progresul taskurilor tale:</p>
+    <p>Urmărește progresul popularitatii salilor arcade in lume:</p>
     <canvas id="progressChart"></canvas>
+
+    <img src="https://rgmedia.raportuldegarda.ro/2019/07/statistici-adul%C8%9Bi-jocuri-video.jpg" alt="Statistici despre jocuri video">
   </div>
 
-  <script src="arcade-todo.js"></script>
+  <div class="text-section">
+    <h2>🎮 Gamingul – O punte între generații</h2>
+    <p>
+      Gamingul modern nu mai este doar o simplă formă de divertisment – este o cultură globală care unește oameni de toate vârstele, din toate colțurile lumii. 
+      De la adolescenți care explorează lumi virtuale complexe, la adulți care găsesc relaxare în experiențe casual sau competitive, jocurile video au devenit un limbaj comun al generațiilor moderne.
+    </p>
+    <p>
+      O sală arcade modernă reprezintă mai mult decât un loc cu aparate retro – este o poartă către socializare, distracție și chiar mișcare fizică. 
+      Într-un spațiu unde se combină nostalgia jocurilor clasice cu inovația tehnologică, oamenii pot experimenta gamingul într-un mod activ, interactiv și plin de energie.
+    </p>
+    <p>
+      Arcade-urile reușesc să creeze o comunitate vie, în care tinerii pot descoperi istoria gamingului, iar adulții pot retrăi amintiri din copilărie. 
+      Într-o lume digitală dominată de conexiuni virtuale, aceste locuri reintroduc contactul real, râsetele și spiritul de competiție sănătoasă.
+    </p>
+    <p>
+      Astfel, gamingul nu doar unește oameni – ci le oferă șansa să învețe, să colaboreze și să se bucure împreună de experiențe care depășesc limitele ecranului.
+    </p>
+  </div>
+
+  <script>
+    // Exemplu de grafic demo
+    const ctx = document.getElementById('progressChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['2022', '2023', '2024', '2025'],
+        datasets: [{
+          label: 'Progres (%)',
+          data: [50, 60, 55, 85],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>

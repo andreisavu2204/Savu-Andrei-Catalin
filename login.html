@@ -24,7 +24,7 @@
     // Preluăm parametrul redirect din URL și îl punem în hidden input
     const urlParams = new URLSearchParams(window.location.search);
     const redirectValue = urlParams.get('redirect');
-    if(redirectValue){
+    if (redirectValue) {
         document.querySelector('input[name="redirect"]').value = redirectValue + "_package.php";
     }
 </script>

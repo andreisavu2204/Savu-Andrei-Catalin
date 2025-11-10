@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="ro">
+<script>
+const themeSwitch = document.getElementById('theme-switch');
+
+// Încarcă tema salvată din localStorage
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+    document.body.classList.toggle('light', savedTheme === 'light');
+    themeSwitch.value = savedTheme;
+});
+
+// Schimbă tema când utilizatorul selectează altceva
+themeSwitch.addEventListener('change', () => {
+    const theme = themeSwitch.value;
+    document.body.classList.toggle('light', theme === 'light');
+    localStorage.setItem('siteTheme', theme);
+});
+</script>
+
+<!-- Bara de setări -->
+<div id="settings-bar">
+    <label for="theme-switch">Tema:</label>
+    <select id="theme-switch">
+        <option value="dark">Negru</option>
+        <option value="light">Alb</option>
+    </select>
+</div
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<a href="document.html" class="logo-link">
+    <img src="logo.png" alt="Logo Arcade" class="logo">
+</a>
 
     <main>
         <h1>Bun venit la pagina management Arcade</h1>
@@ -26,6 +56,20 @@
             </ul>
         </nav>
     </main>
+
+
+
+<!-- Imagine Arcade cu efect pop-up și neon -->
+<div class="arcade-popup-container">
+    <img src="https://www.pngplay.com/wp-content/uploads/6/Arcade-Machine-Icon-PNG.png" 
+         alt="Arcade Machine" class="arcade-popup">
+</div>
+
+
+
+
+
+
 
 
 </body>
