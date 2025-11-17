@@ -1,97 +1,202 @@
 <!DOCTYPE html>
 <html lang="ro">
-<script>
-const themeSwitch = document.getElementById('theme-switch');
-
-// Încarcă tema salvată din localStorage
-document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
-    document.body.classList.toggle('light', savedTheme === 'light');
-    themeSwitch.value = savedTheme;
-});
-
-// Schimbă tema când utilizatorul selectează altceva
-themeSwitch.addEventListener('change', () => {
-    const theme = themeSwitch.value;
-    document.body.classList.toggle('light', theme === 'light');
-    localStorage.setItem('siteTheme', theme);
-});
-</script>
-
-<!-- Bara de setări -->
-<div id="settings-bar">
-    <label for="theme-switch">Tema:</label>
-    <select id="theme-switch">
-        <option value="dark">Negru</option>
-        <option value="light">Alb</option>
-    </select>
-</div
 
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css"> 
+
+    <style>
+        /* LOGO ÎN STÂNGA SUS */
+        .logo-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 15px #00eaff);
+        }
+
+        /* Container centrat pentru imagine */
+        .arcade-popup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        /* Imagine cu glow neon */
+        .arcade-popup {
+            width: 300px;
+            filter: drop-shadow(0 0 20px #00eaff)
+                    drop-shadow(0 0 40px #00eaff)
+                    drop-shadow(0 0 60px #00eaff);
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        /* Animație pentru efect puls neon */
+        @keyframes glowPulse {
+            0% {
+                filter: drop-shadow(0 0 10px #00eaff)
+                        drop-shadow(0 0 20px #00eaff);
+            }
+            100% {
+                filter: drop_shadow(0 0 30px #00eaff)
+                        drop-shadow(0 0 60px #00eaff);
+            }
+        }
+        
+        /* --- STILURI NOI PENTRU POP-UP-UL DE SETĂRI --- */
+
+        /* Buton de deschidere (pictogramă) */
+        #settings-toggle {
+            position: fixed;
+            top: 50%;
+            left: 0; /* Lipit de marginea stângă */
+            transform: translateY(-50%);
+            padding: 10px 15px;
+            background: rgba(0, 40, 50, 0.8);
+            color: #00eaff;
+            border: 2px solid #00eaff;
+            border-left: none; /* Arată ca o agrafă pe margine */
+            cursor: pointer;
+            z-index: 1001; /* Deasupra pop-up-ului când este închis */
+            font-size: 1.5em;
+            line-height: 1;
+            box-shadow: 0 0 10px #00eaff;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #settings-toggle:hover {
+            background: rgba(0, 80, 100, 0.9);
+            box-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
+        }
+
+        /* Containerul pop-up care glisează */
+        #settings-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background: rgba(20, 20, 30, 0.95); /* Fundal închis, semi-transparent */
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+            /* Ascunde inițial pop-up-ul în afara ecranului */
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-out; /* Animație de glisare */
+            border-right: 2px solid #00eaff; /* Margine neon */
+            box-sizing: border-box;
+        }
+
+        /* Starea DESCHISĂ a pop-up-ului */
+        #settings-popup.open {
+            transform: translateX(0); /* Glisează în ecran */
+        }
+        
+        /* Stiluri pentru elementele din bara de setări */
+        #settings-bar {
+            padding: 20px 0;
+            color: white;
+        }
+        
+        #settings-bar label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #00eaff; /* Text neon */
+            text-shadow: 0 0 5px #00eaff;
+        }
+
+        #theme-switch {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #00eaff;
+            background: #111;
+            color: white;
+            font-size: 1em;
+            box-shadow: 0 0 5px rgba(0, 234, 255, 0.5);
+        }
+        
+        /* Buton de închidere (opțional, poți folosi și tasta ESC sau click în afară cu JS) */
+        #close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #00eaff;
+            font-size: 1.5em;
+            cursor: pointer;
+            text-shadow: 0 0 5px #00eaff;
+        }
+        
+    </style>
 </head>
+
 <body>
-<a href="document.html" class="logo-link">
-    <img src="logo.png" alt="Logo Arcade" class="logo">
-</a>
+<button id="settings-toggle" title="Setări temă">
+    ⚙️
+</button>
 
-    <main>
-        <h1>Bun venit la pagina management Arcade</h1>
-
-        <div style="text-align: center; margin-bottom: 40px;">
-            <a href="management.html" class="arcade-button" style="padding: 15px 30px; font-size: 1.2em;">
-                ⚙️ Accesează Management
-            </a>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="login.html" class="arcade-button">Login</a></li>
-                <li><a href="main.html" class="arcade-button">Task-uri (Planner)</a></li>
-                <li><a href="calendar.html" class="arcade-button">Calendar</a></li>
-                <li><a href="stats.html" class="arcade-button">Statistici</a></li>
-                <li><a href="explore.html" class="arcade-button">Explore</a></li>
-            </ul>
-        </nav>
-    </main>
+<div id="settings-popup">
+    <button id="close-popup">✕</button>
+    
+    <div id="settings-bar">
+        <h3>Modificare Temă</h3>
+        <label for="theme-switch">Selectează Tema:</label>
+        <select id="theme-switch">
+            <option value="dark">Negru (Implicit)</option>
+            <option value="light">Alb</option>
+        </select>
+    </div>
+    
+    </div>
 
 
+<a href="#" class="logo-link">
+    </a>
 
-<!-- Imagine Arcade cu efect pop-up și neon -->
+<main>
+    <h1>Bun venit la pagina management Arcade</h1>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+        <a href="management.html" class="arcade-button" style="padding: 15px 30px; font-size: 1.2em;">
+            ⚙️ Accesează Management
+        </a>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="login.html" class="arcade-button">Login</a></li>
+            <li><a href="main.html" class="arcade-button">Task-uri (Planner)</a></li>
+            <li><a href="calendar.html" class="arcade-button">Calendar</a></li>
+            <li><a href="stats.html" class="arcade-button">Statistici</a></li>
+            <li><a href="explore.html" class="arcade-button">Explore</a></li>
+        </ul>
+    </nav>
+</main>
+
 <div class="arcade-popup-container">
     <img src="https://www.pngplay.com/wp-content/uploads/6/Arcade-Machine-Icon-PNG.png" 
          alt="Arcade Machine" class="arcade-popup">
 </div>
 
-
-
-
-
-
-
-
-</body>
-</html>
-<!-- SECȚIUNE DESPRE NOI + CONTACT US ÎNTR-UN SINGUR CHENAR -->
 <section class="about-contact neon-box">
-    <!-- Spacer intern pentru scroll mai lung -->
-    <div style="height: 800px;"></div> <!-- face scroll vizibil -->
+    <div style="height: 800px;"></div>
 
-    <!-- Despre noi -->
     <div class="about-us">
         <h2>Despre noi</h2>
         <p>
-            De peste 20 de ani, suntem pionieri în managementul arcade-urilor, combinând pasiunea pentru jocuri cu 
-            excelența în servicii și inovație tehnologică. În tot acest timp, ne-am construit o reputație solidă, 
-            bazată pe profesionalism, atenție la detalii și satisfacția clienților. Echipa noastră dedicată 
-            transformă fiecare proiect într-o experiență memorabilă și se asigură că fiecare arcade este gestionat 
-            la cele mai înalte standarde.
+            De peste 20 de ani, suntem pionieri în managementul arcade-urilor...
         </p>
     </div>
 
-    <!-- Contact us -->
     <div class="contact-us" style="margin-top: 50px;">
         <h2>Contact Us</h2>
         <p><strong>Telefon:</strong> 0728801296</p>
@@ -99,6 +204,111 @@ themeSwitch.addEventListener('change', () => {
     </div>
 </section>
 
-<!-- BUTON Mergi sus -->
 <a href="#top" id="back-to-top">⬆️ Mergi sus</a>
 
+
+<script>
+// Referințe la elementele DOM
+const themeSwitch = document.getElementById('theme-switch');
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsPopup = document.getElementById('settings-popup');
+const closePopup = document.getElementById('close-popup');
+
+// --- Logica de Temă (Rămasă din codul tău) ---
+
+// Funcție pentru aplicarea temei
+function applyTheme(theme) {
+    // Presupunând că 'light' este clasa pentru tema albă
+    document.body.classList.toggle('light', theme === 'light');
+    localStorage.setItem('siteTheme', theme);
+}
+
+// 1. Încarcă tema salvată din localStorage la încărcarea paginii
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+    applyTheme(savedTheme);
+    themeSwitch.value = savedTheme; // Setează valoarea selectului
+});
+
+// 2. Schimbă tema când utilizatorul selectează altceva
+themeSwitch.addEventListener('change', () => {
+    const theme = themeSwitch.value;
+    applyTheme(theme);
+});
+
+
+// --- Logica de Pop-up Glisant (Noul Cod) ---
+
+// Deschide/Închide pop-up-ul la apăsarea butonului de setări (pictogramă)
+settingsToggle.addEventListener('click', () => {
+    // Adaugă sau elimină clasa 'open' pentru a glisa pop-up-ul
+    settingsPopup.classList.toggle('open');
+});
+
+// Închide pop-up-ul la apăsarea butonului 'X' din interior
+closePopup.addEventListener('click', () => {
+    settingsPopup.classList.remove('open');
+});
+
+// Opțional: Închide pop-up-ul când se apasă tasta ESC
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && settingsPopup.classList.contains('open')) {
+        settingsPopup.classList.remove('open');
+    }
+});
+</script>
+<script>
+// Referințe la elementele DOM
+const themeSwitch = document.getElementById('theme-switch');
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsPopup = document.getElementById('settings-popup');
+const closePopup = document.getElementById('close-popup');
+
+// Funcție pentru aplicarea temei și salvarea ei
+function applyTheme(theme) {
+    document.body.classList.toggle('light', theme === 'light');
+    localStorage.setItem('siteTheme', theme);
+}
+
+// 1. ÎNCAȚĂ TEMA LA STARTUP: Funcționează pe TOATE paginile.
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+    applyTheme(savedTheme);
+    
+    // Setează valoarea selectului, dacă elementul themeSwitch există pe pagină.
+    if (themeSwitch) {
+        themeSwitch.value = savedTheme; 
+    }
+});
+
+// 2. SCHIMBĂ TEMA: Funcționează doar pe paginile care au selectorul de temă.
+if (themeSwitch) {
+    themeSwitch.addEventListener('change', () => {
+        const theme = themeSwitch.value;
+        applyTheme(theme);
+    });
+}
+
+// 3. LOGICA POP-UP: Funcționează doar pe paginile care au elementele toggle/popup.
+if (settingsToggle) {
+    settingsToggle.addEventListener('click', () => {
+        settingsPopup.classList.toggle('open');
+    });
+}
+
+if (closePopup) {
+    closePopup.addEventListener('click', () => {
+        settingsPopup.classList.remove('open');
+    });
+}
+
+// Închide pop-up-ul când se apasă tasta ESC
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+        settingsPopup.classList.remove('open');
+    }
+});
+</script>
+
+</body>
+</html>

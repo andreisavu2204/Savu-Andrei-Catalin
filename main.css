@@ -1,11 +1,15 @@
+/* ==================================================== */
+/* --- STILURI GENERALE ȘI TEMĂ ÎNTUNECATĂ (DEFAULT) --- */
+/* ==================================================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #0d0d0d;
-    color: #f2f2f2;
-    /* Am ajustat padding-ul pentru a lăsa loc benzilor laterale de 60px */
-    padding: 30px 90px;
+    color: #f2f2f2; /* Text alb-gri pentru dark mode */
+    /* Ajustat padding: lățimea benzilor (90px) + spațiu suplimentar (15px) = 105px */
+    padding: 30px 105px; 
     /* Fundal Mov-Albastru Neon */
     background-image: linear-gradient(to right, #1f0036, #0d1b2a);
+    transition: background-color 0.5s, color 0.5s, background-image 0.5s; /* Adaugă tranziție pentru temă */
 }
 
 /* ==================================================== */
@@ -15,14 +19,16 @@ body::before, body::after {
     content: "";
     position: fixed;
     top: 0;
-    width: 60px;
+    width: 90px; /* Lățimea benzilor laterale */
     height: 100vh;
-    z-index: -1;
+    z-index: -1; /* Sub conținut */
     
-    background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fzaax36mhjij71.jpg%3Fwidth%3D640%26crop%3Dsmart%26auto%3Dwebp%26s%3D71944eff3e96efa640b9cabf63f2c66bd6fea173');
+    /* Imaginea pentru benzile laterale */
+    background-image: url('https://www.themenscave.sg/wp-content/uploads/2021/07/TMC-Blog-Header2-8-1024x574.jpg');
     background-size: cover;
-    background-repeat: repeat-y;
-    box-shadow: 0 0 15px #ff00ff;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 15px #ff00ff; /* Stil neon */
+    transition: all 0.5s ease;
 }
 
 body::before {
@@ -33,6 +39,18 @@ body::before {
 body::after {
     right: 0;
     border-left: 3px solid #ff00ff;
+}
+
+/* Responsive: ascunde benzile pe mobil */
+@media (max-width: 900px) {
+    body {
+        /* Elimină padding-ul lateral când benzile sunt ascunse */
+        padding: 30px; 
+    }
+    body::before,
+    body::after {
+        display: none;
+    }
 }
 /* ==================================================== */
 
@@ -107,7 +125,7 @@ nav li {
 
 
 /* Stil de bază pentru butonul <button> */
-button {
+button:not(#settings-toggle):not(#close-popup) {
     margin-top: 15px;
     padding: 10px 20px;
     background-color: #00ffff;
@@ -120,7 +138,7 @@ button {
     box-shadow: 0 0 5px #00ffff;
 }
 
-button:hover {
+button:not(#settings-toggle):not(#close-popup):hover {
     background-color: #ff00ff;
     color: white;
     box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
@@ -168,15 +186,13 @@ input, textarea {
     border: 2px solid #ff00ff;
     box-shadow: 0 0 10px #ff00ff;
     transition: all 0.4s ease;
-    
-    /* Flexbox pentru a alinia butoanele jos */
     display: flex; 
     flex-direction: column; 
+    color: #f2f2f2; 
 }
 
-/* NOU: Container flexibil pentru conținutul care variază în înălțime */
 .package-content {
-    flex-grow: 1; /* Permite acestui div să ocupe tot spațiul disponibil */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -210,7 +226,6 @@ input, textarea {
     flex-grow: 1;
 }
 
-/* Stil pentru fiecare caracteristică (ramă neon turcoaz) */
 .package-card ul li {
     background: none;
     border: 1px solid #00ffff;
@@ -224,19 +239,12 @@ input, textarea {
     transition: none;
 }
 
-.package-card ul li:hover {
-    transform: none;
-    box-shadow: 0 0 8px #00ffff;
-    background: rgba(255, 255, 255, 0.05);
-}
-
 .package-card ul li::before {
     content: '★';
     color: #ff00ff;
     margin-right: 10px;
 }
 
-/* Stil pentru butonul de comandă din card (aliniat jos și centrat) */
 .package-card .order-btn {
     display: block;
     width: 100%;
@@ -247,63 +255,60 @@ input, textarea {
     border-radius: 8px;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    align-self: center; /* Centrare orizontală în Flex container */
-    margin-top: auto; /* Împinge butonul cât mai jos posibil */
-
+    align-self: center; 
+    margin-top: auto; 
+    text-decoration: none;
 }
 
 .package-card .order-btn:hover {
-
-/* BENZI LATERALE FIXE FĂRĂ ASTRICHEAZĂ LAYOUT-UL */
-body::before, body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    width: 90px; /* lățimea benzilor */
-    height: 100vh;
-    z-index: -1; /* sub conținut */
-    background-image: url('https://www.themenscave.sg/wp-content/uploads/2021/07/TMC-Blog-Header2-8-1024x574.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #ff00ff;
+    color: #fff;
+    box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+    transform: scale(1.05);
 }
+/* -------------------------------------------------------- */
 
-body::before {
-    left: 0;
-}
 
-body::after {
-    right: 0;
-}
-
-/* Responsive: ascunde benzile pe mobil */
-@media (max-width: 900px) {
-    body::before,
-    body::after {
-        display: none;
-    }
-
-}
 /* SECȚIUNI DESPRE NOI ȘI CONTACT - CHENAR NEON */
-.neon-box {
+.about-contact {
     background-color: rgba(0, 0, 0, 0.6);
-    margin: 60px auto;
-    padding: 40px 30px;
-    border-radius: 15px;
     max-width: 900px;
+    margin: 60px auto; 
+    padding: 50px 40px;
+    border-radius: 15px;
     text-align: center;
-    color: #f2f2f2;
+    color: #f2f2f2; 
     box-shadow: 
         0 0 10px #ff00ff, 
         0 0 20px #ff00ff, 
         0 0 30px #00ffff, 
         0 0 40px #00ffff;
     border: 2px solid #ff00ff;
+    transition: all 0.4s ease; 
 }
 
-.neon-box h2 {
+
+.about-contact h2 {
     color: #ff00ff;
     text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
+    font-size: 2rem;
     margin-bottom: 20px;
+}
+
+.about-contact p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #e0e0ff;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-contact:hover {
+    box-shadow: 
+        0 0 20px #ff00ff, 
+        0 0 40px #ff00ff, 
+        0 0 60px #00ffff, 
+        0 0 80px #00ffff;
 }
 
 /* BUTON MERGI SUS */
@@ -327,140 +332,220 @@ body::after {
     color: #000;
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 900px) {
-    .neon-box {
-        margin: 30px 20px;
-        padding: 25px 20px;
-    }
 
-    #back-to-top {
-        padding: 10px 14px;
-    }
-}
-/* Chenar neon pentru ambele secțiuni */
-.about-contact {
-    background-color: rgba(0, 0, 0, 0.6);
-    max-width: 900px;
-    margin: 1000px auto 60px auto; /* scroll lung + distanță jos */
-    padding: 50px 40px;
-    border-radius: 15px;
-    text-align: center;
-    color: #f2f2f2;
-    box-shadow: 
-        0 0 10px #ff00ff, 
-        0 0 20px #ff00ff, 
-        0 0 30px #00ffff, 
-        0 0 40px #00ffff;
-    border: 2px solid #ff00ff;
+/* ==================================================== */
+/* --- LOGO ȘI IMAGINE ARCADE GLOW --- */
+/* ==================================================== */
+
+.logo-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
 }
 
-/* Titluri și text mai plăcut */
-.about-contact h2 {
-    color: #ff00ff;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
-    font-size: 2rem;
-    margin-bottom: 20px;
+.logo {
+    width: 110px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #00eaff)
+             drop-shadow(0 0 20px #00eaff)
+             drop-shadow(0 0 40px #00eaff);
+    transition: transform 0.3s ease;
 }
 
-.about-contact p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #e0e0ff;
-    max-width: 800px;
-    margin: 0 auto;
+.logo:hover {
+    transform: scale(1.1);
 }
 
-/* Efect neon suplimentar la hover */
-.about-contact:hover {
-    box-shadow: 
-        0 0 20px #ff00ff, 
-        0 0 40px #ff00ff, 
-        0 0 60px #00ffff, 
-        0 0 80px #00ffff;
+/* Container centrat */
+.arcade-popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
 }
 
-/* Responsivitate pentru mobil */
-@media (max-width: 900px) {
-
-    /* Cardurile se reașază vertical */
-    .packages-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .package-card {
-        width: 90%; /* ocupă aproape tot ecranul */
-    }
-
-    /* Fonturile și secțiunile text */
-    h1, h2 {
-        font-size: 1.5rem;
-    }
-
-    .about-contact {
-        margin: 40px 20px;
-        padding: 25px 20px;
-    }
-
-    /* Ascund benzile laterale pe mobil */
-    body::before,
-    body::after {
-        display: none;
-    }
+/* Imaginea arcade cu efect neon */
+.arcade-popup {
+    width: 300px;
+    filter: drop-shadow(0 0 20px #00eaff)
+            drop-shadow(0 0 40px #00eaff)
+            drop-shadow(0 0 60px #00eaff);
+    animation: glowPulse 2s infinite alternate;
 }
 
+/* Animație glow */
+@keyframes glowPulse {
+    0% {
+        filter: drop-shadow(0 0 10px #00eaff)
+                drop-shadow(0 0 20px #00eaff);
+    }
+    100% {
+        filter: drop-shadow(0 0 30px #00eaff)
+                drop-shadow(0 0 60px #00eaff);
+    }
+} 
+/* ==================================================== */
+/* --- POP-UP SETĂRI (GLISANT STÂNGA) --- */
+/* ==================================================== */
 
-/* Bara de setări fixa in coltul dreapta sus */
-#settings-bar {
+/* Buton de deschidere (pictogramă) */
+#settings-toggle {
     position: fixed;
-    top: 15px;
-    right: 20px;
-    background-color: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 8px;
-    z-index: 1001;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    top: 50%;
+    left: 0; 
+    transform: translateY(-50%);
+    padding: 8px 12px; 
+    background: rgba(0, 40, 50, 0.8);
+    color: #00eaff;
+    border: 2px solid #00eaff;
+    border-left: none; 
+    cursor: pointer;
+    z-index: 4001; 
+    font-size: 1.2em; 
+    line-height: 1;
+    box-shadow: 0 0 8px #00eaff;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Tema luminoasa */
+#settings-toggle:hover {
+    background: rgba(0, 80, 100, 0.9);
+    box-shadow: 0 0 12px #00eaff, 0 0 16px #00eaff;
+}
+
+/* Containerul pop-up care glisează */
+#settings-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: rgba(20, 20, 30, 0.95); 
+    z-index: 4000;
+    padding: 20px;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-out; 
+    border-right: 2px solid #00eaff; 
+    box-sizing: border-box;
+}
+
+/* Starea DESCHISĂ a pop-up-ului */
+#settings-popup.open {
+    transform: translateX(0); 
+}
+
+#close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #00eaff;
+    font-size: 1.5em;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00eaff;
+}
+
+#settings-bar h3,
+#settings-bar label {
+    color: #00eaff;
+    text-shadow: 0 0 5px #00eaff;
+}
+
+#theme-switch {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #00eaff;
+    background: #111;
+    color: white;
+    font-size: 1em;
+    box-shadow: 0 0 5px rgba(0, 234, 255, 0.5);
+}
+
+/* ==================================================== */
+/* --- TEMA LUMINIOASĂ (BODY.LIGHT - ALB GRIZAT) --- */
+/* ==================================================== */
 body.light {
-    background-color: #ffffff;
-    color: #000000;
-    background-image: none; /* scoate gradientul neon pentru light theme */
+    /* Fundal Alb Grizat, Text Negru */
+    background-color: #f0f0f0; 
+    color: #333333 !important; /* Textul principal devine negru */
+    background-image: none; 
 }
 
+/* Teme Light - Titluri */
 body.light h1,
 body.light h2 {
     color: #000000;
     text-shadow: none;
 }
 
+/* Teme Light - Link-uri */
 body.light a {
     color: #0077ff;
     text-shadow: none;
 }
 
+/* Teme Light - Butoanele arcade */
 body.light .arcade-button {
-    background-color: #f0f0f0;
+    background-color: #ffffff; 
     color: #000;
     border-color: #0077ff;
-    box-shadow: 0 0 5px #0077ff;
+    box-shadow: 0 0 5px rgba(0, 119, 255, 0.5);
+    text-shadow: none;
 }
 
 body.light .arcade-button:hover {
-    background-color: #0077ff;
-    color: #fff;
+    background-color: #e0e0e0;
+    color: #000;
     box-shadow: 0 0 10px #0077ff;
 }
 
+/* Teme Light - Chenarele neon (About/Contact) */
 body.light .neon-box,
 body.light .about-contact {
-    background-color: #f0f0f0;
-    color: #000;
+    background-color: #ffffff; /* Fundal alb */
+    color: #333333; /* Text negru în chenar */
     border: 2px solid #0077ff;
-    box-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.5);
 }
+
+body.light .about-contact h2 {
+    color: #0077ff;
+    text-shadow: none;
+}
+
+body.light .about-contact p {
+    color: #333333; /* Textul din paragrafele chenarului */
+}
+
+/* Teme Light - Cardurile de pachet */
+body.light .package-card,
+body.light .package-card ul li {
+    background: #ffffff;
+    color: #333333; /* Text negru în carduri */
+    border-color: #0077ff;
+    box-shadow: 0 0 5px rgba(0, 119, 255, 0.3);
+}
+
+body.light .package-card .price {
+    color: #0077ff;
+    text-shadow: none;
+}
+
+/* Teme Light - Input-uri */
+body.light input,
+body.light textarea {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 3px rgba(0, 119, 255, 0.2);
+}
+
+/* Teme Light - Butonul de comandă (order-btn) */
+body.light .package-card .order-btn {
+    background-color: #0077ff;
+    color: #fff;
+    box-shadow: 0 0 8px #0077ff;
+}
+/* ==================================================== */
