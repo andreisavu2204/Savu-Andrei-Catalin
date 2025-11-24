@@ -24,14 +24,28 @@
     </div>
 </div>
 
-  <h1>🗓️ Calendar Taskuri Arcade</h1>
+    <h1>🗓️ Calendar Taskuri Arcade</h1>
 
-  <div class="container">
-    <p>Aici poți vedea toate taskurile ordonate după deadline:</p>
-    <div id="calendar-view"></div>
-  </div>
+    <div class="container">
+        <p>Aici poți vedea toate taskurile ordonate după deadline:</p>
+        <div id="calendar-view">
+            </div>
 
-  <script src="arcade-todo.js"></script>
+        <div id="calendar-legend">
+            <h2>Cheie Taskuri (Legenda)</h2>
+            <div class="legend-item">
+                <span class="legend-color task-verificare"></span> Verificare Locație
+            </div>
+            <div class="legend-item">
+                <span class="legend-color task-montare"></span> Montare Echipamente
+            </div>
+            <div class="legend-item">
+                <span class="legend-color task-aranjare"></span> Aranjare Finală/Estetică
+            </div>
+        </div>
+    </div>
+
+    <script src="arcade-todo.js"></script>
 
 <script>
 // Referințe la elementele DOM
@@ -39,11 +53,74 @@ const themeSwitch = document.getElementById('theme-switch');
 const settingsToggle = document.getElementById('settings-toggle');
 const settingsPopup = document.getElementById('settings-popup');
 const closePopup = document.getElementById('close-popup');
+const calendarView = document.getElementById('calendar-view'); // Elementul unde se afișează calendarul
 
 // Funcție pentru aplicarea temei și salvarea ei
 function applyTheme(theme) {
     document.body.classList.toggle('light', theme === 'light');
     localStorage.setItem('siteTheme', theme);
+}
+
+// 4. LOGICA DE GENERARE A CALENDARULUI (Mutată aici pentru coerență)
+function generateCalendar(targetElement) {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0 = Ianuarie
+
+    // Numele lunii și zilelor săptămânii (în Română)
+    const monthNames = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+    const dayNames = ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sâm"];
+
+    // Task-urile posibile și culorile lor (folosind clase CSS)
+    const taskTypes = [
+        { name: 'Verificare', className: 'task-verificare' },
+        { name: 'Montare', className: 'task-montare' },
+        { name: 'Aranjare', className: 'task-aranjare' }
+    ];
+
+    // Câte zile are luna curentă
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    // Ziua din săptămână a primei zile (0=Duminică, 1=Luni...)
+    const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+    
+    let calendarHTML = `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
+    calendarHTML += `<div class="calendar-grid">`;
+
+    // Capetele de tabel cu zilele săptămânii
+    dayNames.forEach(day => {
+        calendarHTML += `<div class="day-header">${day}</div>`;
+    });
+
+    // Celule goale pentru zilele din luna anterioară
+    for (let i = 0; i < firstDayOfWeek; i++) {
+        calendarHTML += `<div class="calendar-day empty"></div>`;
+    }
+
+    // Celulele cu datele lunii curente
+    for (let day = 1; day <= daysInMonth; day++) {
+        let dayClass = '';
+        let taskInfo = '';
+        
+        // Generează aleatoriu task-uri (aproximativ 40% șanse să aibă un task)
+        if (Math.random() < 0.4) { 
+            const randomTaskIndex = Math.floor(Math.random() * taskTypes.length);
+            const task = taskTypes[randomTaskIndex];
+
+            dayClass = task.className; // Adaugă clasa de culoare
+            taskInfo = `<span class="task-label">${task.name}</span>`;
+        }
+
+        // Marchează ziua de azi
+        const isToday = (day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) ? 'today' : '';
+
+        calendarHTML += `<div class="calendar-day ${isToday} ${dayClass}">
+                            <span class="day-number">${day}</span>
+                            ${taskInfo}
+                         </div>`;
+    }
+    
+    calendarHTML += `</div>`; // Închide calendar-grid
+    targetElement.innerHTML = calendarHTML;
 }
 
 // 1. ÎNCARCĂ TEMA LA STARTUP
@@ -54,6 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setează valoarea selectului, dacă elementul themeSwitch există.
     if (themeSwitch) {
         themeSwitch.value = savedTheme; 
+    }
+    
+    // GENEREAZĂ CALENDARUL la încărcarea paginii
+    if (calendarView) {
+        generateCalendar(calendarView);
     }
 });
 

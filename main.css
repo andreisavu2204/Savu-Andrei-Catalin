@@ -6,7 +6,7 @@ body {
     background-color: #0d0d0d;
     color: #f2f2f2; /* Text alb-gri pentru dark mode */
     /* Ajustat padding: lățimea benzilor (90px) + spațiu suplimentar (15px) = 105px */
-    padding: 30px 105px; 
+    padding: 30px 105px;
     /* Fundal Mov-Albastru Neon */
     background-image: linear-gradient(to right, #1f0036, #0d1b2a);
     transition: background-color 0.5s, color 0.5s, background-image 0.5s; /* Adaugă tranziție pentru temă */
@@ -45,7 +45,7 @@ body::after {
 @media (max-width: 900px) {
     body {
         /* Elimină padding-ul lateral când benzile sunt ascunse */
-        padding: 30px; 
+        padding: 30px;
     }
     body::before,
     body::after {
@@ -186,13 +186,13 @@ input, textarea {
     border: 2px solid #ff00ff;
     box-shadow: 0 0 10px #ff00ff;
     transition: all 0.4s ease;
-    display: flex; 
-    flex-direction: column; 
-    color: #f2f2f2; 
+    display: flex;
+    flex-direction: column;
+    color: #f2f2f2;
 }
 
 .package-content {
-    flex-grow: 1; 
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -255,8 +255,8 @@ input, textarea {
     border-radius: 8px;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    align-self: center; 
-    margin-top: auto; 
+    align-self: center;
+    margin-top: auto;
     text-decoration: none;
 }
 
@@ -273,18 +273,18 @@ input, textarea {
 .about-contact {
     background-color: rgba(0, 0, 0, 0.6);
     max-width: 900px;
-    margin: 60px auto; 
+    margin: 60px auto;
     padding: 50px 40px;
     border-radius: 15px;
     text-align: center;
-    color: #f2f2f2; 
-    box-shadow: 
-        0 0 10px #ff00ff, 
-        0 0 20px #ff00ff, 
-        0 0 30px #00ffff, 
+    color: #f2f2f2;
+    box-shadow:
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #00ffff,
         0 0 40px #00ffff;
     border: 2px solid #ff00ff;
-    transition: all 0.4s ease; 
+    transition: all 0.4s ease;
 }
 
 
@@ -304,10 +304,10 @@ input, textarea {
 }
 
 .about-contact:hover {
-    box-shadow: 
-        0 0 20px #ff00ff, 
-        0 0 40px #ff00ff, 
-        0 0 60px #00ffff, 
+    box-shadow:
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px #00ffff,
         0 0 80px #00ffff;
 }
 
@@ -369,8 +369,8 @@ input, textarea {
 .arcade-popup {
     width: 300px;
     filter: drop-shadow(0 0 20px #00eaff)
-            drop-shadow(0 0 40px #00eaff)
-            drop-shadow(0 0 60px #00eaff);
+             drop-shadow(0 0 40px #00eaff)
+             drop-shadow(0 0 60px #00eaff);
     animation: glowPulse 2s infinite alternate;
 }
 
@@ -378,13 +378,13 @@ input, textarea {
 @keyframes glowPulse {
     0% {
         filter: drop-shadow(0 0 10px #00eaff)
-                drop-shadow(0 0 20px #00eaff);
+                 drop-shadow(0 0 20px #00eaff);
     }
     100% {
         filter: drop-shadow(0 0 30px #00eaff)
-                drop-shadow(0 0 60px #00eaff);
+                 drop-shadow(0 0 60px #00eaff);
     }
-} 
+}
 /* ==================================================== */
 /* --- POP-UP SETĂRI (GLISANT STÂNGA) --- */
 /* ==================================================== */
@@ -393,16 +393,16 @@ input, textarea {
 #settings-toggle {
     position: fixed;
     top: 50%;
-    left: 0; 
+    left: 0;
     transform: translateY(-50%);
-    padding: 8px 12px; 
+    padding: 8px 12px;
     background: rgba(0, 40, 50, 0.8);
     color: #00eaff;
     border: 2px solid #00eaff;
-    border-left: none; 
+    border-left: none;
     cursor: pointer;
-    z-index: 4001; 
-    font-size: 1.2em; 
+    z-index: 4001;
+    font-size: 1.2em;
     line-height: 1;
     box-shadow: 0 0 8px #00eaff;
     transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -420,19 +420,19 @@ input, textarea {
     left: 0;
     height: 100%;
     width: 250px;
-    background: rgba(20, 20, 30, 0.95); 
+    background: rgba(20, 20, 30, 0.95);
     z-index: 4000;
     padding: 20px;
     box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
     transform: translateX(-100%);
-    transition: transform 0.4s ease-out; 
-    border-right: 2px solid #00eaff; 
+    transition: transform 0.4s ease-out;
+    border-right: 2px solid #00eaff;
     box-sizing: border-box;
 }
 
 /* Starea DESCHISĂ a pop-up-ului */
 #settings-popup.open {
-    transform: translateX(0); 
+    transform: translateX(0);
 }
 
 #close-popup {
@@ -464,13 +464,138 @@ input, textarea {
 }
 
 /* ==================================================== */
+/* --- STILURI CALENDAR (ADĂUGATE) --- */
+/* ==================================================== */
+#calendar-view h2 {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+    border: 1px solid #ff00ff; /* Border neon */
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(26, 0, 43, 0.6); /* Fundal închis semitransparent */
+}
+
+.day-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0;
+    background-color: #330055;
+    color: #00ffff;
+}
+
+.calendar-day {
+    padding: 10px 5px;
+    min-height: 80px;
+    background-color: #1a002b;
+    border: 1px solid #ff00ff;
+    border-radius: 4px;
+    position: relative;
+    font-size: 14px;
+    color: #f2f2f2;
+    cursor: default;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.1);
+    transition: transform 0.2s;
+}
+
+.calendar-day:not(.empty):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+.calendar-day .day-number {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 0 3px #fff;
+}
+
+.calendar-day.empty {
+    background-color: #111;
+    border: 1px solid #1a1a1a;
+    visibility: hidden; /* Ascunde celulele goale */
+}
+
+.calendar-day.today {
+    border: 3px solid #00ffff; /* Border albastru-neon pentru ziua curentă */
+    background-color: #2b004a;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* Task Colors - Neon Theme */
+.task-verificare {
+    background-color: #4CAF50; /* Verde standard */
+    box-shadow: 0 0 8px #4CAF50;
+}
+.task-montare {
+    background-color: #FFC107; /* Galben/Auriu */
+    color: #333 !important;
+    box-shadow: 0 0 8px #FFC107;
+}
+.task-aranjare {
+    background-color: #00B0FF; /* Albastru deschis */
+    box-shadow: 0 0 8px #00B0FF;
+}
+
+.task-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 5px;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+
+/* Stiluri Legenda Calendar */
+#calendar-legend {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #ff00ff;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Aplică stilurile de culoare și la Legenda */
+.legend-color.task-verificare { background-color: #4CAF50; }
+.legend-color.task-montare { background-color: #FFC107; }
+.legend-color.task-aranjare { background-color: #00B0FF; }
+
+
+/* ==================================================== */
 /* --- TEMA LUMINIOASĂ (BODY.LIGHT - ALB GRIZAT) --- */
 /* ==================================================== */
 body.light {
     /* Fundal Alb Grizat, Text Negru */
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
     color: #333333 !important; /* Textul principal devine negru */
-    background-image: none; 
+    background-image: none;
 }
 
 /* Teme Light - Titluri */
@@ -488,7 +613,7 @@ body.light a {
 
 /* Teme Light - Butoanele arcade */
 body.light .arcade-button {
-    background-color: #ffffff; 
+    background-color: #ffffff;
     color: #000;
     border-color: #0077ff;
     box-shadow: 0 0 5px rgba(0, 119, 255, 0.5);
@@ -547,5 +672,46 @@ body.light .package-card .order-btn {
     background-color: #0077ff;
     color: #fff;
     box-shadow: 0 0 8px #0077ff;
+}
+
+/* --- TEMA LUMINIOASĂ - STILURI CALENDAR --- */
+body.light .calendar-grid {
+    border: 1px solid #0077ff;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.2);
+    background-color: #fff;
+}
+
+body.light .day-header {
+    background-color: #e0f0ff;
+    color: #000;
+}
+
+body.light .calendar-day {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    color: #333;
+    box-shadow: none;
+}
+
+body.light .calendar-day .day-number {
+    color: #333;
+    text-shadow: none;
+}
+
+body.light .calendar-day.today {
+    border: 3px solid #ff5500; /* Altă culoare de accent pentru Light */
+    background-color: #fff0e0;
+    box-shadow: 0 0 10px rgba(255, 85, 0, 0.3);
+}
+
+body.light .task-verificare { background-color: #81C784; } /* Verde mai deschis */
+body.light .task-montare { background-color: #FFF176; color: #333 !important; } /* Galben mai deschis */
+body.light .task-aranjare { background-color: #4FC3F7; } /* Albastru mai deschis */
+
+body.light #calendar-legend {
+    border: 1px solid #0077ff;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.1);
+    color: #333;
 }
 /* ==================================================== */
