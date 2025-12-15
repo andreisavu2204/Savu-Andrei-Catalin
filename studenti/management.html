@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pachete Management Arcade</title>
+    <link rel="stylesheet" href="main.css">
+    
+    </head>
+<body>
+    
+    <button id="settings-toggle" title="Setări temă">
+        ⚙️
+    </button>
+
+    <div id="settings-popup">
+        <button id="close-popup">✕</button>
+        
+        <div id="settings-bar">
+            <h3>Modificare Temă</h3>
+            <label for="theme-switch">Selectează Tema:</label>
+            <select id="theme-switch">
+                <option value="dark">Negru (Implicit)</option>
+                <option value="light">Alb</option>
+            </select>
+        </div>
+    </div>
+    <h1>Pachete Management Sală Arcade</h1>
+
+    <div class="packages-grid">
+        
+        <div class="package-card">
+            <h2>PACHET STANDARD</h2>
+            <div class="package-content">
+                <div class="price">800 €</div>
+                <ul>
+                    <li>Servicii de Statistică a jocurilor</li>
+                    <li>Analiză Jocuri Importante</li>
+                    <li>Raport lunar de performanță</li>
+                </ul>
+                <a href="login.html?redirect=standard" class="order-btn">ALEGE PACHETUL</a> 
+            </div>
+        </div>
+
+        <div class="package-card">
+            <h2>PACHET PLUS</h2>
+            <div class="package-content">
+                <div class="price">1200 €</div>
+                <ul>
+                    <li>Tot ce include Pachetul Standard</li>
+                    <li>Furnizare sistem recompensare prin puncte</li>
+                    <li>Creare sistem recompensare (reguli/premii)</li>
+                    <li>Training utilizare sistem recompense</li>
+                </ul>
+                <a href="login.html?redirect=plus" class="order-btn">ALEGE PACHETUL</a>
+            </div>
+        </div>
+
+        <div class="package-card">
+            <h2>PACHET MAX</h2>
+            <div class="package-content">
+                <div class="price">1800 €</div>
+                <ul>
+                    <li>Tot ce includ pachetele anterioare</li>
+                    <li>Amenajare și Design Interior Sală</li>
+                    <li>Distribuirea și Montarea Mașinăriilor</li>
+                    <li>Generarea unei Tematici Arcade Unice</li>
+                    <li>Suport tehnic prioritar</li>
+                </ul>
+                <a href="login.html?redirect=max" class="order-btn">ALEGE PACHETUL</a>
+            </div>
+        </div>
+
+    </div>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="document.html" class="arcade-button">⬅ Înapoi la pagina principală</a>
+    </p>
+    
+    <script>
+    // Referințe la elementele DOM
+    const themeSwitch = document.getElementById('theme-switch');
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsPopup = document.getElementById('settings-popup');
+    const closePopup = document.getElementById('close-popup');
+
+    // Funcție pentru aplicarea temei și salvarea ei
+    function applyTheme(theme) {
+        document.body.classList.toggle('light', theme === 'light');
+        localStorage.setItem('siteTheme', theme);
+    }
+
+    // 1. ÎNCARCĂ TEMA LA STARTUP
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+        applyTheme(savedTheme);
+        
+        // Setează valoarea selectului, dacă elementul themeSwitch există.
+        if (themeSwitch) {
+            themeSwitch.value = savedTheme; 
+        }
+    });
+
+    // 2. SCHIMBĂ TEMA
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', () => {
+            const theme = themeSwitch.value;
+            applyTheme(theme);
+        });
+    }
+
+    // 3. LOGICA POP-UP
+    if (settingsToggle) {
+        settingsToggle.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.toggle('open');
+            }
+        });
+    }
+
+    if (closePopup) {
+        closePopup.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.remove('open');
+            }
+        });
+    }
+
+    // Închide pop-up-ul când se apasă tasta ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+            settingsPopup.classList.remove('open');
+        }
+    });
+    </script>
+
+</body>
+</html>

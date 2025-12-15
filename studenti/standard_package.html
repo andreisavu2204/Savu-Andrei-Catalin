@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pachet Standard - Management Arcade</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .details-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .image-side {
+            flex: 0 0 400px; /* Dimensiune fixă pentru imagine */
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-side {
+            flex-grow: 1;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff00ff; /* Linie de accent Roz Neon */
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .stage-card:hover {
+            transform: translateX(5px);
+        }
+
+        .stage-card h3 {
+            color: #00ffff; /* Turcoaz Neon */
+            margin-top: 0;
+            text-shadow: 0 0 3px #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pachet Standard: Analiză și Performanță 📊</h1>
+    <h2 style="color: #ff00ff;">Preț: 800 €</h2>
+
+    <div class="details-container">
+        
+        <div class="image-side">
+            <img src="https://www.nwradu.ro/wp-content/uploads/2020/11/rgda_sondaj_4.jpg" alt="Grafice și Analize de Date">
+        </div>
+
+        <div class="text-side">
+            <p>Pachetul Standard este fundația oricărei săli de jocuri de succes. Acesta se concentrează pe colectarea și interpretarea datelor pentru a transforma deciziile intuitive în strategii bazate pe dovezi. Obiectivul este maximizarea profitului prin optimizarea selecției de jocuri.</p>
+            
+            <div class="stage-card">
+                <h3>Etapa 1: Servicii de Statistică a Jocurilor (Game Telemetry)</h3>
+                <p>Implementăm un sistem discret de telemetrie care monitorizează în timp real performanța fiecărei mașinării. Colectăm date critice precum: **frecvența de joc**, **venitul generat pe oră**, **timpul mediu de așteptare** și **raportul câștig/pierdere** al jucătorilor. Aceste statistici brute ne permit să identificăm rapid jocurile sub-performante și pe cele cu potențial neexploatat.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 2: Analiză Aprofundată a Jocurilor Importante (Core Game Audit)</h3>
+                <p>Ne concentrăm pe 20% din jocurile care generează 80% din venit (regula Pareto). Printr-o analiză calitativă și cantitativă, determinăm dacă prețul de joc, setările de dificultate sau poziționarea mașinăriilor sunt optime. Vă oferim recomandări concrete pentru ajustarea acestor parametri, asigurând că titlurile voastre vedetă ating performanța maximă.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 3: Raport Lunar de Performanță și Propuneri de Acțiune</h3>
+                <p>La sfârșitul fiecărei luni, primiți un raport complet, ușor de citit, care traduce statisticile complexe în limbaj de afaceri. Raportul include un scor de sănătate a sălii (Arcade Health Score) și o listă scurtă de acțiuni prioritare. **Exemplu:** Mutarea jocului X în zona Y sau înlocuirea mașinăriei Z cu un titlu nou sugerat de noi, bazat pe trendurile pieței.</p>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="management.html" class="arcade-button">⬅ Înapoi la Pachete</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

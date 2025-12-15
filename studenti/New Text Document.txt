@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pachet Plus - Management Arcade</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .details-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .image-side {
+            flex: 0 0 400px; /* Dimensiune fixă pentru imagine */
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-side {
+            flex-grow: 1;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff00ff; /* Linie de accent Roz Neon */
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .stage-card:hover {
+            transform: translateX(5px);
+        }
+
+        .stage-card h3 {
+            color: #00ffff; /* Turcoaz Neon */
+            margin-top: 0;
+            text-shadow: 0 0 3px #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pachet Plus: Fidelizare și Recompense 🌟</h1>
+    <h2 style="color: #ff00ff;">Preț: 1200 €</h2>
+
+    <div class="details-container">
+        
+        <div class="image-side">
+            <img src="https://leisuredome.ie/wp-content/uploads/2021/10/card-3.jpg" alt="Sistem de Carduri Recompensă Arcade">
+        </div>
+
+        <div class="text-side">
+            <p>Pachetul Plus include toate beneficiile Pachetului Standard și adaugă un sistem complet de fidelizare și recompensare. Acest lucru transformă vizitatorii ocazionali în clienți fideli, asigurând că banii câștigați în jocuri se întorc în sala dumneavoastră sub formă de premii și experiențe unice.</p>
+            
+            <div class="stage-card" style="border-left-color: #00ffff;">
+                <h3>Inclus: Pachetul Standard (Analiză și Performanță)</h3>
+                <p>Include Serviciile de Statistică, Analiza Jocurilor Importante și Raportul Lunar de Performanță. Vă garantăm o bază solidă de optimizare înainte de a construi sistemul de fidelizare.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 1: Furnizarea Sistemului de Puncte și Carduri</h3>
+                <p>Asigurăm întreaga infrastructură tehnică. Aceasta include furnizarea de cititoare de carduri compatibile cu mașinăriile existente, integrarea unui server de punctaj centralizat și designul cardurilor personalizate (fizice sau digitale) pe care clienții le vor utiliza pentru a acumula credite și tichete digitale.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 2: Crearea Logicii de Recompensare (Reguli & Premii)</h3>
+                <p>Colaborăm pentru a stabili reguli de joc echilibrate și motivante. Definim structura de conversie a punctelor în tichete (e.g., câți bani = câte puncte) și selectăm un catalog de premii atractiv. Ne asigurăm că valoarea premiilor este optimă pentru a încuraja cheltuielile repetate fără a afecta marja de profit a sălii.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 3: Training și Mentenanță (Operaționalizare)</h3>
+                <p>Oferim training complet personalului dumneavoastră cu privire la operarea noului sistem, de la încărcarea creditelor pe carduri până la procesarea premiilor. Vă asistăm în primele săptămâni de lansare pentru a ne asigura că tranziția la noul sistem de fidelizare este lină și fără întreruperi tehnice.</p>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="management.html" class="arcade-button">⬅ Înapoi la Pachete</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

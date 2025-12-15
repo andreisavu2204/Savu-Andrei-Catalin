@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistici - Arcade Planner</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Stiluri Locale Suprascriind main.css (Dark Mode) */
+        body {
+            /* Păstrăm setările de font/margine local dacă main.css e generic */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 2.2em;
+            color: #ff00ff; /* Folosim o culoare din schema neon principală */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #1a1a1a; /* Fundal închis */
+            border-radius: 15px;
+            padding: 20px;
+            /* Folosim umbre din schema neon principală */
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3); 
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+        }
+
+        p {
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .text-section {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: #181818; /* Fundal închis */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.15);
+        }
+
+        /* ==================================================== */
+        /* --- AJUSTĂRI PENTRU TEMA LUMINIOASĂ (BODY.LIGHT) --- */
+        /* ==================================================== */
+
+        /* Containerul principal și secțiunea de text trebuie să fie albe/gri deschis */
+        body.light .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 119, 255, 0.1); 
+        }
+
+        body.light .text-section {
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 119, 255, 0.1);
+        }
+
+        /* H1 își preia stilul negru din main.css, dar dacă nu ar merge: */
+        /* body.light h1 { color: #000000; text-shadow: none; } */
+    </style>
+</head>
+<body>
+    
+    <button id="settings-toggle" title="Setări temă">
+        ⚙️
+    </button>
+
+    <div id="settings-popup">
+        <button id="close-popup">✕</button>
+        
+        <div id="settings-bar">
+            <h3>Modificare Temă</h3>
+            <label for="theme-switch">Selectează Tema:</label>
+            <select id="theme-switch">
+                <option value="dark">Negru (Implicit)</option>
+                <option value="light">Alb</option>
+            </select>
+        </div>
+    </div>
+    <h1>📊 Statistici & Impactul Gamingului</h1>
+
+    <div class="container">
+        <p>Urmărește progresul popularitatii salilor arcade in lume:</p>
+        <canvas id="progressChart"></canvas>
+
+        <img src="https://rgmedia.raportuldegarda.ro/2019/07/statistici-adul%C8%9Bi-jocuri-video.jpg" alt="Statistici despre jocuri video">
+    </div>
+
+    <div class="text-section">
+        <h2>🎮 Gamingul – O punte între generații</h2>
+        <p>
+            Gamingul modern nu mai este doar o simplă formă de divertisment – este o cultură globală care unește oameni de toate vârstele, din toate colțurile lumii. 
+            De la adolescenți care explorează lumi virtuale complexe, la adulți care găsesc relaxare în experiențe casual sau competitive, jocurile video au devenit un limbaj comun al generațiilor moderne.
+        </p>
+        <p>
+            O sală arcade modernă reprezintă mai mult decât un loc cu aparate retro – este o poartă către socializare, distracție și chiar mișcare fizică. 
+            Într-un spațiu unde se combină nostalgia jocurilor clasice cu inovația tehnologică, oamenii pot experimenta gamingul într-un mod activ, interactiv și plin de energie.
+        </p>
+        <p>
+            Arcade-urile reușesc să creeze o comunitate vie, în care tinerii pot descoperi istoria gamingului, iar adulții pot retrăi amintiri din copilărie. 
+            Într-o lume digitală dominată de conexiuni virtuale, aceste locuri reintroduc contactul real, râsetele și spiritul de competiție sănătoasă.
+        </p>
+        <p>
+            Astfel, gamingul nu doar unește oameni – ci le oferă șansa să învețe, să colaboreze și să se bucure împreună de experiențe care depășesc limitele ecranului.
+        </p>
+    </div>
+
+    <script>
+    // Codul Chart.js (Rămas de la tine)
+    const ctx = document.getElementById('progressChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2022', '2023', '2024', '2025'],
+            datasets: [{
+                label: 'Progres (%)',
+                data: [50, 60, 55, 85],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+
+    // --- LOGICA TEMEI ȘI POP-UP-ULUI (ADĂUGAT) ---
+
+    // Referințe la elementele DOM
+    const themeSwitch = document.getElementById('theme-switch');
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsPopup = document.getElementById('settings-popup');
+    const closePopup = document.getElementById('close-popup');
+
+    // Funcție pentru aplicarea temei și salvarea ei
+    function applyTheme(theme) {
+        document.body.classList.toggle('light', theme === 'light');
+        localStorage.setItem('siteTheme', theme);
+        // Aici poți adăuga logica pentru a schimba culorile graficului Chart.js
+    }
+
+    // 1. ÎNCARCĂ TEMA LA STARTUP
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+        applyTheme(savedTheme);
+        
+        if (themeSwitch) {
+            themeSwitch.value = savedTheme; 
+        }
+    });
+
+    // 2. SCHIMBĂ TEMA
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', () => {
+            const theme = themeSwitch.value;
+            applyTheme(theme);
+        });
+    }
+
+    // 3. LOGICA POP-UP
+    if (settingsToggle) {
+        settingsToggle.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.toggle('open');
+            }
+        });
+    }
+
+    if (closePopup) {
+        closePopup.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.remove('open');
+            }
+        });
+    }
+
+    // Închide pop-up-ul când se apasă tasta ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+            settingsPopup.classList.remove('open');
+        }
+    });
+    </script>
+
+</body>
+</html>
