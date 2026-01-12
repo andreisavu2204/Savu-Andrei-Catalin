@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pachet Plus - Management Arcade</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        /* CSS-ul Pachetului Plus (adaptat pentru o culoare de accent diferită) */
+
+        .details-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Schimbăm culoarea de accent pentru Pachetul Plus - Galben Neon */
+        .image-side {
+            flex: 0 0 400px;
+            /* Culoare BORDER/SHADOW: Verde Neon (#39ff14) */
+            border: 3px solid #39ff14; 
+            box-shadow: 0 0 15px #39ff14;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-side {
+            flex-grow: 1;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+            /* Culoare Linie de accent: Galben Neon (#FFFF00) */
+            border-left: 5px solid #FFFF00;
+            /* Culoare Box Shadow: Galben Neon (cu opacitate) */
+            box-shadow: 0 0 8px rgba(255, 255, 0, 0.4);
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .stage-card:hover {
+            transform: translateX(5px);
+        }
+
+        .stage-card h3 {
+            /* Culoare Titlu Card: Verde Neon (#39ff14) */
+            color: #39ff14;
+            margin-top: 0;
+            text-shadow: 0 0 3px #39ff14;
+        }
+
+        /* Culoarea Prețului: Galben Neon (#FFFF00) */
+        .price-color {
+            color: #FFFF00;
+        }
+        
+        /* Culoarea Titlului Principal: Verde Neon (#39ff14) */
+        .title-color {
+            color: #39ff14;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title-color">Pachet Plus: Strategie, Expansiune și Design de Experiență 🚀</h1>
+    <h2 class="price-color">Preț: 1200 €</h2>
+
+    <div class="details-container">
+        
+        <div class="image-side">
+            <img src="https://i.imgur.com/5zW9u2f.png" alt="Harta Sălii de Jocuri și Strategie de Plasare"> 
+        </div>
+
+        <div class="text-side">
+            <p>Pachetul Plus este dedicat proprietarilor care doresc nu doar să optimizeze, ci să **crească** și să **rafineze experiența clienților**. Acesta include toate funcționalitățile Pachetului Standard, la care se adaugă elemente critice de design al spațiului, strategie de prețuri avansată și o atenție specială pe retenția clienților.</p>
+            
+            <div class="stage-card">
+                <h3>Etapa 1: Analiza Fluxului de Vizitatori și Re-Design al Layout-ului</h3>
+                <p>Pe baza datelor de telemetrie, realizăm o **diagramă a fluxului de vizitatori** (Heatmap). Vă oferim un plan detaliat de **re-poziționare a mașinăriilor** pentru a maximiza traficul spre jocurile cu potențial ridicat și a reduce timpii de așteptare. Scopul este crearea unui "circuit" de joc optim care să încurajeze o durată de ședere mai lungă.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 2: Strategii Avansate de Prețuri și Oferte (Dynamic Pricing)</h3>
+                <p>Trecem de la prețuri statice la o structură de prețuri dinamică. Analizăm datele orare și zilnice pentru a recomanda: **Happy Hours** eficiente, pachete de jocuri (bundles) și sisteme de loialitate. Vă ajutăm să stabiliți prețuri optime care să crească venitul în perioadele de vârf și să stimuleze jocul în perioadele mai slabe.</p>
+            </div>
+
+            <div class="stage-card">
+                <h3>Etapa 3: Plan de Retenție a Clienților și Feedback (Player Retention Blueprint)</h3>
+                <p>Dezvoltăm un plan de acțiune pentru a transforma clienții ocazionali în clienți fideli. Acest lucru include recomandări privind: **sistemele de recompense**, evenimentele tematice și metodele de colectare de feedback. Vă oferim șabloane de comunicare pentru a menține un engagement constant al comunității voastre de jucători.</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="management.html" class="arcade-button">⬅ Înapoi la Pachete</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

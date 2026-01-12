@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Arcade Planner</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<button id="settings-toggle" title="Setări temă">
+    ⚙️
+</button>
+
+<div id="settings-popup">
+    <button id="close-popup">✕</button>
+    
+    <div id="settings-bar">
+        <h3>Modificare Temă</h3>
+        <label for="theme-switch">Selectează Tema:</label>
+        <select id="theme-switch">
+            <option value="dark">Negru (Implicit)</option>
+            <option value="light">Alb</option>
+        </select>
+    </div>
+</div>
+
+    <h1>🗓️ Calendar Taskuri Arcade</h1>
+
+    <div class="container">
+        <p>Aici poți vedea toate taskurile ordonate după deadline:</p>
+        <div id="calendar-view">
+            </div>
+
+        <div id="calendar-legend">
+            <h2>Cheie Taskuri (Legenda)</h2>
+            <div class="legend-item">
+                <span class="legend-color task-verificare"></span> Verificare Locație
+            </div>
+            <div class="legend-item">
+                <span class="legend-color task-montare"></span> Montare Echipamente
+            </div>
+            <div class="legend-item">
+                <span class="legend-color task-aranjare"></span> Aranjare Finală/Estetică
+            </div>
+        </div>
+    </div>
+
+    <script src="arcade-todo.js"></script>
+
+<script>
+// Referințe la elementele DOM
+const themeSwitch = document.getElementById('theme-switch');
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsPopup = document.getElementById('settings-popup');
+const closePopup = document.getElementById('close-popup');
+const calendarView = document.getElementById('calendar-view'); // Elementul unde se afișează calendarul
+
+// Funcție pentru aplicarea temei și salvarea ei
+function applyTheme(theme) {
+    document.body.classList.toggle('light', theme === 'light');
+    localStorage.setItem('siteTheme', theme);
+}
+
+// 4. LOGICA DE GENERARE A CALENDARULUI (Mutată aici pentru coerență)
+// Generează calendarul și inserează task-urile din calendar.php
+async function generateCalendar(targetElement) {
+        // Task-urile posibile și culorile lor (folosind clase CSS)
+        const taskTypes = [
+            { name: 'Verificare', className: 'task-verificare' },
+            { name: 'Montare', className: 'task-montare' },
+            { name: 'Aranjare', className: 'task-aranjare' }
+        ];
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0 = Ianuarie
+
+    const monthNames = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+    const dayNames = ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sâm"];
+
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+
+    // Preia task-urile din calendar.php
+    let tasks = [];
+    try {
+        const response = await fetch('calendar.php');
+        if (response.ok) {
+            tasks = await response.json();
+        }
+    } catch (e) {
+        // Dacă nu merge fetch-ul, tasks rămâne gol
+    }
+
+    // Creează un map cu task-urile pe zile (cheie: yyyy-mm-dd)
+    const taskMap = {};
+    tasks.forEach(task => {
+        if (task.DueDate) {
+            taskMap[task.DueDate] = taskMap[task.DueDate] || [];
+            taskMap[task.DueDate].push(task);
+        }
+    });
+
+    let calendarHTML = `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
+    calendarHTML += `<div class="calendar-grid">`;
+
+    dayNames.forEach(day => {
+        calendarHTML += `<div class="day-header">${day}</div>`;
+    });
+
+    for (let i = 0; i < firstDayOfWeek; i++) {
+        calendarHTML += `<div class="calendar-day empty"></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${currentYear}-${String(currentMonth+1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        let taskInfo = '';
+        let dayClass = '';
+        if (taskMap[dateStr]) {
+            let hasVerificare = false;
+            taskInfo = taskMap[dateStr].map(task => {
+                let colorClass = '';
+                const desc = task.Description.toLowerCase();
+                for (const type of taskTypes) {
+                    if (desc.includes(type.name.toLowerCase())) {
+                        colorClass = type.className;
+                        if (type.className === 'task-verificare') hasVerificare = true;
+                        break;
+                    }
+                }
+                return `<span class=\"task-label ${colorClass}\">${task.Description}</span>`;
+            }).join('<br>');
+            dayClass = 'calendar-has-task';
+            if (hasVerificare) dayClass += ' task-verificare';
+        }
+        const isToday = (day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) ? 'today' : '';
+        calendarHTML += `<div class="calendar-day ${isToday} ${dayClass}">
+                            <span class="day-number">${day}</span>
+                            ${taskInfo}
+                         </div>`;
+    }
+
+    calendarHTML += `</div>`;
+    targetElement.innerHTML = calendarHTML;
+}
+
+// 1. ÎNCARCĂ TEMA LA STARTUP
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+    applyTheme(savedTheme);
+    
+    // Setează valoarea selectului, dacă elementul themeSwitch există.
+    if (themeSwitch) {
+        themeSwitch.value = savedTheme; 
+    }
+    
+    // GENEREAZĂ CALENDARUL la încărcarea paginii
+    if (calendarView) {
+        generateCalendar(calendarView);
+    }
+});
+
+// 2. SCHIMBĂ TEMA
+if (themeSwitch) {
+    themeSwitch.addEventListener('change', () => {
+        const theme = themeSwitch.value;
+        applyTheme(theme);
+    });
+}
+
+// 3. LOGICA POP-UP
+if (settingsToggle) {
+    settingsToggle.addEventListener('click', () => {
+        if (settingsPopup) {
+            settingsPopup.classList.toggle('open');
+        }
+    });
+}
+
+if (closePopup) {
+    closePopup.addEventListener('click', () => {
+        if (settingsPopup) {
+            settingsPopup.classList.remove('open');
+        }
+    });
+}
+
+// Închide pop-up-ul când se apasă tasta ESC
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+        settingsPopup.classList.remove('open');
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-uri - Arcade Planner</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <button id="settings-toggle" title="Setări temă">
+        ⚙️
+    </button>
+
+    <div id="settings-popup">
+        <button id="close-popup">✕</button>
+        
+        <div id="settings-bar">
+            <h3>Modificare Temă</h3>
+            <label for="theme-switch">Selectează Tema:</label>
+            <select id="theme-switch">
+                <option value="dark">Negru (Implicit)</option>
+                <option value="light">Alb</option>
+            </select>
+        </div>
+    </div>
+    <h1>🕹️ Task-uri Arcade</h1>
+
+    <div class="container">
+        <form class="input-group" action="main.php" method="POST">
+            <input type="text" name="task" placeholder="Scrie un task..." required>
+            <input type="date" name="deadline" required>
+            <button type="submit" class="arcade-button">Adaugă</button>
+        </form>
+
+        <ul id="task-list"></ul>
+    </div>
+
+    <div style="height: 50px;"></div> <section class="about-us neon-box about-contact">
+        <h2>Despre noi</h2>
+        <p>
+            Suntem o companie dedicată managementului arcade-urilor, cu o experiență de peste 20 de ani. 
+            De la începuturile noastre modeste până la rețeaua de arcade moderne de astăzi, ne-am concentrat pe 
+            inovație, servicii de calitate și satisfacția clienților. Reputația noastră solidă s-a construit prin 
+            implementarea celor mai bune practici și tehnologii de management arcade, devenind un punct de referință 
+            în domeniu. Ne mândrim cu echipa noastră profesionistă, pasiunea pentru jocuri și atenția la detalii, 
+            oferind clienților o experiență memorabilă de fiecare dată.
+        </p>
+    </section>
+
+    <section class="contact-us neon-box about-contact">
+        <h2>Contact Us</h2>
+        <p><strong>Telefon:</strong> 0728801296</p>
+        <p><strong>E-mail:</strong> andreisavu298@gmail.com</p>
+    </section>
+    
+    <script src="arcade-todo.js"></script>
+    
+    <script>
+    // Referințe la elementele DOM
+    const themeSwitch = document.getElementById('theme-switch');
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsPopup = document.getElementById('settings-popup');
+    const closePopup = document.getElementById('close-popup');
+
+    // Funcție pentru aplicarea temei și salvarea ei
+    function applyTheme(theme) {
+        document.body.classList.toggle('light', theme === 'light');
+        localStorage.setItem('siteTheme', theme);
+    }
+
+    // 1. ÎNCARCĂ TEMA LA STARTUP
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+        applyTheme(savedTheme);
+        
+        // Setează valoarea selectului, dacă elementul themeSwitch există.
+        if (themeSwitch) {
+            themeSwitch.value = savedTheme; 
+        }
+    });
+
+    // 2. SCHIMBĂ TEMA
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', () => {
+            const theme = themeSwitch.value;
+            applyTheme(theme);
+        });
+    }
+
+    // 3. LOGICA POP-UP
+    if (settingsToggle) {
+        settingsToggle.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.toggle('open');
+            }
+        });
+    }
+
+    if (closePopup) {
+        closePopup.addEventListener('click', () => {
+            if (settingsPopup) {
+                settingsPopup.classList.remove('open');
+            }
+        });
+    }
+
+    // Închide pop-up-ul când se apasă tasta ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+            settingsPopup.classList.remove('open');
+        }
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Arcade Management</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<button id="settings-toggle" title="Setări temă">
+    ⚙️
+</button>
+
+<div id="settings-popup">
+    <button id="close-popup">✕</button>
+    
+    <div id="settings-bar">
+        <h3>Modificare Temă</h3>
+        <label for="theme-switch">Selectează Tema:</label>
+        <select id="theme-switch">
+            <option value="dark">Negru (Implicit)</option>
+            <option value="light">Alb</option>
+        </select>
+    </div>
+</div>
+
+<div class="container" style="max-width: 400px; margin: 50px auto;">
+    <h1>Login</h1>
+    <form action="login.php" method="POST">
+        <input type="text" name="username" placeholder="Utilizator" required>
+        <input type="password" name="password" placeholder="Parolă" required>
+
+        <!-- Hidden input pentru redirect (valoare din URL, fără sufix) -->
+        <input type="hidden" name="redirect" value="">
+
+        <button type="submit" class="arcade-button">Loghează-te</button>
+    </form>
+    <div id="login-error-message" style="display:none; color: red; margin-top: 10px; text-align: center;">Nume de utilizator sau parolă incorectă.</div>
+</div>
+
+<script>
+    // Preluăm parametrul redirect din URL și îl punem în hidden input
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectValue = urlParams.get('redirect');
+    if (redirectValue) {
+        document.querySelector('input[name="redirect"]').value = redirectValue;
+    }
+</script>
+<script>
+// Afișează mesaj de eroare dacă există ?error=1 în URL
+const errorParam = new URLSearchParams(window.location.search).get('error');
+if (errorParam === '1') {
+    const errorDiv = document.getElementById('login-error-message');
+    if (errorDiv) {
+        errorDiv.style.display = 'block';
+    }
+}
+</script>
+<script>
+// Referințe la elementele DOM
+const themeSwitch = document.getElementById('theme-switch');
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsPopup = document.getElementById('settings-popup');
+const closePopup = document.getElementById('close-popup');
+
+// Funcție pentru aplicarea temei și salvarea ei
+function applyTheme(theme) {
+    document.body.classList.toggle('light', theme === 'light');
+    localStorage.setItem('siteTheme', theme);
+}
+
+// 1. ÎNCAȚĂ TEMA LA STARTUP: Funcționează pe TOATE paginile.
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+    applyTheme(savedTheme);
+    
+    // Setează valoarea selectului, dacă elementul themeSwitch există pe pagină.
+    if (themeSwitch) {
+        themeSwitch.value = savedTheme; 
+    }
+});
+
+// 2. SCHIMBĂ TEMA: Funcționează doar pe paginile care au selectorul de temă.
+if (themeSwitch) {
+    themeSwitch.addEventListener('change', () => {
+        const theme = themeSwitch.value;
+        applyTheme(theme);
+    });
+}
+
+// 3. LOGICA POP-UP: Funcționează doar pe paginile care au elementele toggle/popup.
+if (settingsToggle) {
+    settingsToggle.addEventListener('click', () => {
+        settingsPopup.classList.toggle('open');
+    });
+}
+
+if (closePopup) {
+    closePopup.addEventListener('click', () => {
+        settingsPopup.classList.remove('open');
+    });
+}
+
+// Închide pop-up-ul când se apasă tasta ESC
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && settingsPopup && settingsPopup.classList.contains('open')) {
+        settingsPopup.classList.remove('open');
+    }
+});
+</script>
+</body>
+</html>

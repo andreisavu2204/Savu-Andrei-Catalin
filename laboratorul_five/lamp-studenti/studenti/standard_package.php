@@ -1,0 +1,41 @@
+<?php
+session_start();
+// verificăm dacă utilizatorul e logat
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location: login.html');
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Standard Package</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<main style="max-width: 500px; margin: 50px auto; padding: 20px; border: 2px solid #ff00ff; box-shadow: 0 0 15px #ff00ff; border-radius: 15px; background-color: rgba(0,0,0,0.6);">
+    <h1 style="text-align:center; color:#00ffff; text-shadow:0 0 5px #00ffff;">Finalizează Comanda - Standard Package</h1>
+    
+    <form action="#" method="post">
+        <!-- Locatie sala -->
+        <label for="location" style="color:#00ffff; text-shadow:0 0 5px #00ffff;">Locația sălii:</label>
+        <input type="text" id="location" name="location" placeholder="Ex: Str. Arcadei 12, București" required style="margin-bottom:20px;">
+
+        <!-- Metoda de plata -->
+        <label style="color:#00ffff; text-shadow:0 0 5px #00ffff;">Metoda de plată:</label><br>
+        <input type="checkbox" id="cash" name="payment[]" value="cash">
+        <label for="cash" style="color:#00ffff;">Cash</label><br>
+        <input type="checkbox" id="card" name="payment[]" value="card">
+        <label for="card" style="color:#00ffff;">Card</label><br>
+        <input type="checkbox" id="installments" name="payment[]" value="installments">
+        <label for="installments" style="color:#00ffff;">Rate</label><br><br>
+
+        <button type="submit" class="arcade-button" style="width:100%;">Finalizează comanda</button>
+    </form>
+
+</main>
+
+</body>
+</html>
